@@ -1,6 +1,12 @@
+
+import AppRoutes from "./config/routes";
+
 function App() {
     return (
-        <h2>Welcome to Dog Breeds SPA</h2>
+        <>
+            <AppRoutes />
+        </>
     )
+
 }
 export default App;
