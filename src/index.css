@@ -37,10 +37,10 @@
     --clr-black: #222;
     --clr-gold: #c59d5f;
     --clr-blue: #007bff;
-    --clr-nav-brand: hsl(57, 94%, 48%);
+    --clr-nav-brand: #b47444;
     --clr-footer-text: #6c757d;
-    --ff-primary: "Roboto", sans-serif;
-    --ff-secondary: "Open Sans", sans-serif;
+    --ff-primary:'Abril Fatface', cursive;
+    --ff-secondary:'Abril Fatface', cursive;
     --transition: all 0.3s linear;
     --spacing: 0.1rem;
     --radius: 0.25rem;
@@ -79,18 +79,27 @@ a {
 
 
 /* navbar styles */
+
+
+
 .navbar-brand {
-    color: #F0E607 !important;
+    color: white !important;
     font-weight: bold;
+    font-size: 30px !important;
+    padding-top:70px;
+    padding-bottom:0px !important;
+    font-family: var(--ff-primary);
+    letter-spacing: .25rem;
 }
 
 .navbar-brand img {
-    width: 40px;
+    width: 90px;
     margin-right: 10px;
 }
 
 .nav-link {
     font-size: 1.2em;
+    font-family: var(--ff-primary);
 }
 
 .nav-separator {
@@ -102,6 +111,11 @@ a {
     padding: 0.5rem 1rem;
     color: white;
     font-size: 1.2rem;
+}
+
+.color-nav{
+    background-color: #647996;
+
 }
 
 /*  sticky footer */
@@ -119,15 +133,19 @@ footer{
 
 /* styles for page content */
 .main-heading {
-    color: #22252c;
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    color: #b47444;
+    font-family: 'Abril Fatface', cursive;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 28px;
     padding: 10px 5px;
+    text-align: center;
+    margin-top:50px;
+    margin-bottom: 30px;
+
 }
 
 .sub-heading {
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-family: 'Abril Fatface', cursive;
     background-color: #f8f9fa;
     font-weight: 600;
     padding: 10px 5px;
@@ -137,8 +155,37 @@ footer{
     padding-top: 20px;
     display: flex;
     flex-direction: column;
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-family: 'Abril Fatface', cursive;
     font-size: 0.9em;
+
+}
+
+.main-content.container{
+    width:80%;
+    margin:0 auto;
+    text-align:center;
+}
+
+.main-content.container p{
+    width:60%;
+    margin:0 auto;
+    background-color: #647996;
+    color:white;
+    border-radius:10px;
+    margin-bottom:50px;
+    padding:10px;
+    font-weight:lighter;
+}
+
+
+.main-content.container hr{
+
+    width:55%;
+    height:3px;
+    color:#66421c;
+    margin:0 auto;
+    margin-top:0px !important;
+    margin-bottom: 50px;
 }
 
 /* styles for the loading image */

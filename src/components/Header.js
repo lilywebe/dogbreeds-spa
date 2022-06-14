@@ -13,10 +13,10 @@ const Header = () => {
     const className = ({ isActive }) => isActive ? "nav-link active" : "nav-link";
     return (
         <>
-            <Navbar bg="primary" variant="dark" expand="sm">
+            <Navbar className="color-nav"  variant="dark" expand="sm">
                 <Container>
                     <NavLink to="/">
-                        <Navbar.Brand><img src={logo} alt="Logo"/>DogBreeds</Navbar.Brand>
+                        <Navbar.Brand><img src={logo} alt="Logo"/>Dog Breeds</Navbar.Brand>
                     </NavLink>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
