@@ -5,7 +5,7 @@ File: signout.js
 Description:
  */
 
-import {useAuth} from '../services/useAuth'
+import {useAuth} from '../../services/useAuth'
 import {useEffect} from 'react';
 
 

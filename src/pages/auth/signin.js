@@ -9,8 +9,8 @@ Description:
 import {Button} from 'react-bootstrap';
 import {useState} from 'react';
 import {useLocation, useNavigate, Link} from "react-router-dom";
-import {useAuth} from "../services/useAuth";
-import './auth/auth.css'
+import {useAuth} from "../../services/useAuth";
+import './auth.css'
 
 
 
@@ -50,7 +50,7 @@ const Signin = () => {
                         {error && <div className="message" style={{color: "red"}}>{error}</div>}
                         {isLoading && <div className="message image-loading">
                             Please wait while data is being loaded
-                            <img src={require(`./loading.gif`)} alt="Loading ......"/>
+                            <img src={require(`src/pages/loading.gif`)} alt="Loading ......"/>
                         </div>}
                         {isAuthed
                             ?

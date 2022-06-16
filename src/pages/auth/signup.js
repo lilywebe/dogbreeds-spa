@@ -9,8 +9,8 @@ Description:
 import {Button} from 'react-bootstrap';
 import {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "../services/useAuth";
-import "./auth/auth.css";
+import {useAuth} from "../../services/useAuth";
+import "./auth.css";
 
 
 const Signup = () => {
@@ -52,7 +52,7 @@ const Signup = () => {
                     {error && <div className="message" style={{color: "red"}}>{error}</div>}
                     {isLoading && <div className="message image-loading">
                         Please wait while data is being loaded
-                        <img src={require(`./loading.gif`)} alt="Loading ......"/>
+                        <img src={require(`src/pages/loading.gif`)} alt="Loading ......"/>
                     </div>}
                     {isAuthed
                         ? <div style={{width: "100%", textAlign: "left"}}>Your account has been successfully created. Click the links in the navbar to explore the app.</div>

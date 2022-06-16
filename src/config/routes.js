@@ -16,9 +16,9 @@ import Breeds from "../pages/breed/breeds";
 import RequireAuth from "../components/RequireAuth";
 
 import {AuthProvider} from "../services/useAuth";
-import Signup from "../pages/signup";
-import Signout from "../pages/signout";
-import Signin from "../pages/signin";
+import Signup from "../pages/auth/signup";
+import Signout from "../pages/auth/signout";
+import Signin from "../pages/auth/signin";
 
 
 
