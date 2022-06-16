@@ -5,9 +5,11 @@ import {useParams, Link, useOutletContext, Outlet} from "react-router-dom";
 import './category.css';
 
 import React from 'react';
+import {useAuth} from "../../services/useAuth";
 
 const Category = () => {
 
+    const {user} = useAuth();
     const [subheading, setSubHeading] = useOutletContext();
     const {categoryID} = useParams();
     const url = settings.baseApiUrl + "/categories/" + categoryID;
@@ -15,7 +17,8 @@ const Category = () => {
         error,
         isLoading,
         data: category
-    } = useXmlHttp(url);
+    } = useXmlHttp(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
+    //} = useXmlHttp(url);
 
     return (
         <>
