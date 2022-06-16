@@ -28,10 +28,10 @@ const Category = () => {
             {category && <>
                 {setSubHeading(category.categoryName)}
                 <div className="category-details">
-                    /*<div className="category-name">{category.categoryName}</div>*/
+                    <div className="category-name">{category.categoryName}</div>
                     <div className="category-info">
                         <div><strong>Description</strong>: {category.categoryDesc}</div>
-                        <div><strong>Breeds</strong>: <Link to={`/categories/${category.categoryID}/breeds`}> Click here to view breeds</Link></div>
+
                     </div>
                 </div>
                 <div className="category-breeds">
