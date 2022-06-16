@@ -2,18 +2,18 @@ import {settings} from "../../config/config";
 import useXmlHttp from '../../services/useXmlHttp';
 import {useParams} from "react-router-dom";
 import './breed.css';
-
+import {useAuth} from "../../services/useAuth";
 import React from 'react';
 
 const Breeds = () => {
-
+    const {user} = useAuth();
     const {categoryID} = useParams();
     const url = settings.baseApiUrl + "/categories/" + categoryID + "/breeds";
     const {
         error,
         isLoading,
         data: breeds
-    } = useXmlHttp(url);
+    } = useXmlHttp(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
 
     return (
         <>

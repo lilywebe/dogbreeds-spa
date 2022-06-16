@@ -12,6 +12,7 @@ import NoMatch from "../pages/nomatch";
 import Categories from "../pages/category/categories";
 import Category from "../pages/category/category";
 import Breeds from "../pages/breed/breeds";
+import RequireAuth from "../components/RequireAuth";
 
 
 const AppRoutes = () => {
@@ -20,7 +21,11 @@ const AppRoutes = () => {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Home/>}/>
-                    <Route path="categories" element={<Categories />}>
+                    <Route path="categories" element={
+                        <RequireAuth>
+                            <Categories />
+                        </RequireAuth>
+                    }>
                         <Route index element={<p>Select a category to view details.</p>}/>
                         <Route path=":categoryID" element={<Category/>} >
                             <Route path="breeds" element={<Breeds/>}/>
