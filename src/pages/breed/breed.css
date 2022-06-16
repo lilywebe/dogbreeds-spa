@@ -1,0 +1,22 @@
+/*
+*  styles for breed-related elements
+ */
+.breed-row {
+    min-height: 35px;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid var(--clr-grey-9);
+}
+
+.breed-row-header{
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #e4f1fe;
+}
+
+.breed-row div {
+    width: 25%;
+}
