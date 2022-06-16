@@ -1,10 +1,8 @@
 import {settings} from "../../config/config";
 import {useState, useEffect} from 'react';
-import {NavLink, useLocation} from "react-router-dom";
-import './category.css';
-import useXmlHttp from "../../services/useXmlHttp";
-
-import React from 'react';
+import {NavLink, useLocation, Outlet} from "react-router-dom";
+import useXmlHttp from '../../services/useXmlHttp'
+//import {useAuth} from '../../services/UseAuth';
 
 const Categories = () => {
     const {pathname} = useLocation();
@@ -38,7 +36,7 @@ const Categories = () => {
 
                     {categories && <div className="category-container">
                         <div className="category-list">
-                            {categories.map((category) => (
+                            {categories.data.map((category) => (
                                 <NavLink key={category.categoryID}
                                          className={({isActive}) => isActive ? "active" : ""}
                                          to={`/categories/${category.categoryID}`}>

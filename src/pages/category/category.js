@@ -1,6 +1,6 @@
 import {settings} from "../../config/config";
 import useXmlHttp from '../../services/useXmlHttp';
-import {useParams, Link, useOutletContext} from "react-router-dom";
+import {useParams, Link, useOutletContext, Outlet} from "react-router-dom";
 
 import './category.css';
 
