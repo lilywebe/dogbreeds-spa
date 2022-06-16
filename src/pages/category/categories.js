@@ -1,10 +1,13 @@
 import {settings} from "../../config/config";
 import {useState, useEffect} from 'react';
 import {NavLink, useLocation, Outlet} from "react-router-dom";
-import useXmlHttp from '../../services/useXmlHttp'
-//import {useAuth} from '../../services/UseAuth';
+import './category.css';
+import useXmlHttp from "../../services/useXmlHttp";
+import React from 'react';
+import {useAuth} from "../../services/useAuth";
 
 const Categories = () => {
+    const {user} = useAuth();
     const {pathname} = useLocation();
     const [subHeading, setSubHeading] = useState("All Categories");
     const url = settings.baseApiUrl + "/categories";
@@ -12,12 +15,12 @@ const Categories = () => {
         error,
         isLoading,
         data: categories
-    } = useXmlHttp(url);
+    } = useXmlHttp(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
     useEffect(() => {
         setSubHeading("All categories");
     }, [pathname]);
 
-    
+
     return (
         <div>
             <div>
