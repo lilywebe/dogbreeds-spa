@@ -13,6 +13,7 @@ import NoMatch from "../pages/nomatch";
 import Categories from "../pages/category/categories";
 import Category from "../pages/category/category";
 import Breeds from "../pages/breed/breeds";
+import Breed from '../pages/breed/breed';
 import RequireAuth from "../components/RequireAuth";
 
 import {AuthProvider} from "../services/useAuth";
@@ -36,8 +37,19 @@ const AppRoutes = () => {
                     }>
                         <Route index element={<p>Select a category to view details.</p>}/>
                         <Route path=":categoryID" element={<Category/>} >
-                            <Route path="breeds" element={<Breeds/>}/>
+
                         </Route>
+
+
+                    </Route>
+                    <Route path="breeds" element={
+                        <RequireAuth>
+                            <Breeds />
+                        </RequireAuth>
+                    }>
+
+
+                            <Route path=":breedID" element={<Breed />} />
 
 
                     </Route>

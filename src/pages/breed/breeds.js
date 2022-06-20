@@ -1,47 +1,151 @@
+//Lily Weber 6-20-2022
+
 import {settings} from "../../config/config";
-import useXmlHttp from '../../services/useXmlHttp';
-import {useParams} from "react-router-dom";
-import './breed.css';
 import {useAuth} from "../../services/useAuth";
-import React from 'react';
+import useAxios from "../../services/useAxios";
+import {NavLink} from "react-router-dom";
+import {useState, useEffect} from "react";
+import "./breed.css";
+import Breed from './breed.js';
+
+
 
 const Breeds = () => {
+    const url = settings.baseApiUrl + "/breeds";
+    const url_sizes = settings.baseApiUrl + "/sizes";
+    const url_categories = settings.baseApiUrl + "/categories";
+    const url_origins = settings.baseApiUrl + "/origins";
+    const url_temp = settings.baseApiUrl + "/temperaments";
     const {user} = useAuth();
-    const {categoryID} = useParams();
-    const url = settings.baseApiUrl + "/categories/" + categoryID + "/breeds";
+
+//declare the data fetching function
     const {
         error,
         isLoading,
         data: breeds
-    } = useXmlHttp(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
+    } = useAxios(url, "GET", {Authorization: "Bearer " + user.jwt});
+
+    const {
+        error: error_sizes,
+        isLoading: isLoading_sizes,
+        data: sizes
+    } = useAxios(url_sizes, "GET", {Authorization: "Bearer " + user.jwt});
+
+    const {
+        error: error_category,
+        isLoading: isLoading_category,
+        data: categories
+    } = useAxios(url_categories, "GET", {Authorization: "Bearer " + user.jwt});
+
+    const {
+        error: error_origins,
+        isLoading: isLoading_origins,
+        data: origins
+    } = useAxios(url_origins, "GET", {Authorization: "Bearer " + user.jwt});
+
+    const {
+        error: error_temp,
+        isLoading: isLoading_temp,
+        data: temperaments
+    } = useAxios(url_temp, "GET", {Authorization: "Bearer " + user.jwt});
+
+
+    const [showBreed, setShowBreed] = useState(false);
+    const handleBreedClick = () => setShowBreed(true);
+
+
+   const getSizeName = (sizeID) => {
+        let output = "Size not Found";
+         if(sizes) {
+             sizes.forEach((size) => {
+                 if (size.sizeID == sizeID) {
+                     output = size.sizeName;
+                 }
+             });
+         }
+        return output;
+    };
+
+   const getCategoryName = (categoryID) => {
+       let output ="Category not found";
+       if(categories){
+           categories.data.forEach((category) =>{
+               if(category.categoryID ==categoryID){
+                   output = category.categoryName;
+               }
+           });
+       }
+       return output;
+   };
+
+    const getOriginName = (originID) => {
+        let output ="Origin not found";
+        if(origins){
+            origins.forEach((origin) =>{
+                if(origin.originID ==originID){
+                    output = origin.originName;
+                }
+            });
+        }
+        return output;
+    };
+
+    const getTempName = (temperamentID) => {
+        let output ="Temperament not found";
+        if(temperaments){
+            temperaments.forEach((temperament) =>{
+                if(temperament.temperamentID ==temperamentID){
+                    output = temperament.temperamentName;
+                }
+            });
+        }
+        return output;
+    };
+
+
 
     return (
         <>
-            {error && <div>{error}</div>}
-            {isLoading &&
+            {showBreed && <Breed show={showBreed} setShow={setShowBreed}/>}
+
+            <div className="main-heading">
+                <div className="container">All Breeds</div>
+            </div>
+
+            <div className="main-content container">
+                {(error || error_sizes || error_category|| error_origins || error_temp) && <div>{error}</div>}
+                {(isLoading || isLoading_sizes || isLoading_category || isLoading_origins || isLoading_temp) &&
                 <div className="image-loading">
                     Please wait while data is being loaded
                     <img src={require(`../loading.gif`)} alt="Loading ......"/>
-                </div>}
-            {breeds && (breeds.length === 0
-                    ? <p>Breeds were not found.</p>
-                    : <div className="breed-row breed-row-header">
+                </div>
+                }
+                {breeds && sizes && categories && origins && temperaments &&
+                <div className="course-container">
+                    <div className="course-row course-row-header">
                         <div>Name</div>
-                        <div>Size</div>
-                        <div>Temperament</div>
-                        <div>Origin</div>
+                        <div>Size ID</div>
+                        <div>Category ID</div>
+                        <div>Temperament ID</div>
+                        <div>Origin ID</div>
                     </div>
-            )}
-            {breeds && (
-                breeds.map((breed, index) => (
-                    <div key={index} className="breed-row">
-                        <div>{breed.name}</div>
-                        <div>{breed.sizeID}</div>
-                        <div>{breed.temperamentID}</div>
-                        <div>{breed.originID}</div>
-                    </div>
-                ))
-            )}
+                    {breeds.data && breeds.data.map((breed) => (
+                        <div key={breed.breedID} className="course-row">
+                            <NavLink
+                                className={({isActive}) => isActive ? "active" : ""}
+                                to={`/breeds/${breed.breedID}`}
+                                onClick={handleBreedClick}>
+                                {breed.name}
+                            </NavLink>
+                            <div>{getSizeName(breed.sizeID)}</div>
+                            <div>{getCategoryName(breed.categoryID)}</div>
+                            <div>{getTempName(breed.temperamentID)}</div>
+                            <div>{getOriginName(breed.originID)}</div>
+                        </div>
+                    ))}
+                </div>}
+            </div>
+
         </>
     );
 };

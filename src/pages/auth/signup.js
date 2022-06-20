@@ -52,7 +52,7 @@ const Signup = () => {
                     {error && <div className="message" style={{color: "red"}}>{error}</div>}
                     {isLoading && <div className="message image-loading">
                         Please wait while data is being loaded
-                        <img src={require(`src/pages/loading.gif`)} alt="Loading ......"/>
+                        <img src={require(`../loading.gif`)} alt="Loading ......"/>
                     </div>}
                     {isAuthed
                         ? <div style={{width: "100%", textAlign: "left"}}>Your account has been successfully created. Click the links in the navbar to explore the app.</div>
