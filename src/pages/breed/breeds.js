@@ -7,11 +7,9 @@ import {NavLink} from "react-router-dom";
 import {useState, useEffect} from "react";
 import useFetch from '../../services/useFetch';
 import JSONPretty from 'react-json-pretty';
-//import "./student.css";
 import "./breed.css";
 import Breed from './breed.js';
 import Pagination from "./pagination";
-
 
 const Breeds = () => {
     const [url, setUrl] = useState(settings.baseApiUrl + "/breeds");
@@ -21,7 +19,7 @@ const Breeds = () => {
     const url_temp = settings.baseApiUrl + "/temperaments";
     const {user} = useAuth();
 
-//declare the data fetching function
+    //declare the data fetching function
     const {
         error,
         isLoading,
