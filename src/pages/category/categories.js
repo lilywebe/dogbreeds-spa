@@ -2,20 +2,22 @@ import {settings} from "../../config/config";
 import {useState, useEffect} from 'react';
 import {NavLink, useLocation, Outlet} from "react-router-dom";
 import './category.css';
-import useXmlHttp from "../../services/useXmlHttp";
 import React from 'react';
 import {useAuth} from "../../services/useAuth";
+import useAxios from "../../services/useAxios";
+import {Link} from "react-router-dom";
+import Pagination from "./pagination";
 
 const Categories = () => {
     const {user} = useAuth();
     const {pathname} = useLocation();
     const [subHeading, setSubHeading] = useState("All Categories");
-    const url = settings.baseApiUrl + "/categories";
+    const [url, setUrl] = useState(settings.baseApiUrl + "/categories?limit=5&offset=0&sort=categoryName:asc");
     const {
         error,
         isLoading,
         data: categories
-    } = useXmlHttp(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
+    } = useAxios(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
     useEffect(() => {
         setSubHeading("All categories");
     }, [pathname]);
@@ -38,6 +40,7 @@ const Categories = () => {
                     </div>}
 
                     {categories && <div className="category-container">
+                        <div>
                         <div className="category-list">
                             {categories.data.map((category) => (
                                 <NavLink key={category.categoryID}
@@ -46,10 +49,15 @@ const Categories = () => {
                                     <span>&nbsp;</span><div>{category.categoryName}</div>
                                 </NavLink>
                             ))}
+
                         </div>
+                        {categories && <Pagination categories={categories} setUrl={setUrl}/>}
+                        </div>
+
                         <div className="category-item">
                             <Outlet context={[subHeading, setSubHeading]}/>
                         </div>
+
                     </div>}
 
 
