@@ -9,10 +9,10 @@ import useFetch from '../../services/useFetch';
 import JSONPretty from 'react-json-pretty';
 import "./breed.css";
 import Breed from './breed.js';
-import Pagination from "./pagination";
+
 
 const Breeds = () => {
-    const [url, setUrl] = useState(settings.baseApiUrl + "/breeds");
+    const url = settings.baseApiUrl + "/breeds";
     const url_sizes = settings.baseApiUrl + "/sizes";
     const url_categories = settings.baseApiUrl + "/categories";
     const url_origins = settings.baseApiUrl + "/origins";
@@ -178,7 +178,7 @@ const Breeds = () => {
                         </div>
                     ))}
                 </div>}
-                {breeds && <Pagination courses={breeds} setUrl={setUrl}/>}
+
             </div>
 
         </>
