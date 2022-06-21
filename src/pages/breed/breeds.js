@@ -5,6 +5,9 @@ import {useAuth} from "../../services/useAuth";
 import useAxios from "../../services/useAxios";
 import {NavLink} from "react-router-dom";
 import {useState, useEffect} from "react";
+import useFetch from '../../services/useFetch';
+import JSONPretty from 'react-json-pretty';
+//import "./student.css";
 import "./breed.css";
 import Breed from './breed.js';
 
@@ -22,8 +25,23 @@ const Breeds = () => {
     const {
         error,
         isLoading,
-        data: breeds
-    } = useAxios(url, "GET", {Authorization: "Bearer " + user.jwt});
+        data: prebreeds,
+        search
+    //} = useAxios(url, "GET", {Authorization: "Bearer " + user.jwt});
+    } = useFetch();
+    if(!prebreeds){
+        search("");
+    }
+    const breeds = (()=>{
+
+        if(prebreeds && (!prebreeds.hasOwnProperty("data"))){
+            return {"data":prebreeds};
+        }
+        else{
+            return prebreeds;
+        }
+    })();
+
 
     const {
         error: error_sizes,
@@ -102,7 +120,17 @@ const Breeds = () => {
         return output;
     };
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const term = document.getElementById("breed-search-term").value;
+        search(term);
+    };
 
+    const clearSearchBox = (e) => {
+        e.preventDefault();
+        document.getElementById("breed-search-term").value = "";
+        search("");
+    };
 
     return (
         <>
@@ -120,14 +148,22 @@ const Breeds = () => {
                     <img src={require(`../loading.gif`)} alt="Loading ......"/>
                 </div>
                 }
+                <form style={{textAlign: "right", marginBottom: "3px"}} onSubmit={handleSearch}>
+                    <input id="breed-search-term" placeholder="Enter search terms"/>
+                    <button type="submit" className="button-light"
+                            style={{marginLeft: "5px"}}>Search</button>
+                    <button className="button-light" style={{marginLeft: "5px"}}
+                            onClick={clearSearchBox}>Clear</button>
+                </form>
+
                 {breeds && sizes && categories && origins && temperaments &&
                 <div className="course-container">
                     <div className="course-row course-row-header">
                         <div>Name</div>
-                        <div>Size ID</div>
-                        <div>Category ID</div>
-                        <div>Temperament ID</div>
-                        <div>Origin ID</div>
+                        <div>Size</div>
+                        <div>Category</div>
+                        <div>Temperament</div>
+                        <div>Origin</div>
                     </div>
                     {breeds.data && breeds.data.map((breed) => (
                         <div key={breed.breedID} className="course-row">

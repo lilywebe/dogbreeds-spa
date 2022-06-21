@@ -44,16 +44,16 @@ const Breed = ({show, setShow}) => {
                             <div>Name</div><div>{breed.name}</div>
                         </div>
                         <div className="course-detail-row">
-                            <div>Size</div><div>{breed.sizeID}</div>
+                            <div>Size ID</div><div>{breed.sizeID}</div>
                         </div>
                         <div className="course-detail-row">
-                            <div>Category</div><div>{breed.categoryID}</div>
+                            <div>Category ID</div><div>{breed.categoryID}</div>
                         </div>
                         <div className="course-detail-row">
-                            <div>Temperament</div><div>{breed.temperamentID}</div>
+                            <div>Temperament ID</div><div>{breed.temperamentID}</div>
                         </div>
                         <div className="course-detail-row">
-                            <div>Origin</div><div>{breed.originID}</div>
+                            <div>Origin ID</div><div>{breed.originID}</div>
                         </div>
                     </div>
                     }
