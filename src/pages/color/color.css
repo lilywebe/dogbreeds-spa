@@ -1,7 +1,7 @@
 /*
-*  styles for color-related elements
+*  styles for student-related elements
  */
-.color-container{
+.student-container{
     margin: 10px auto;
     width: 100%;
     display: flex;
@@ -9,10 +9,10 @@
     justify-content: flex-start;
 }
 
-.color-container > div:nth-child(odd) {
+.student-container > div:nth-child(odd) {
     background-color: #f8f9fa;
 }
-.color-row {
+.student-row {
     width: 100%;
     min-height: 35px;
     padding-left: 5px;
@@ -22,7 +22,7 @@
     border-bottom: 1px solid #e4f1fe;
 }
 
-.color-row-header {
+.student-row-header {
     font-weight: bold;
     font-size: 14px;
     color: #22252c;
@@ -30,26 +30,38 @@
     border-top: 1px solid #e4f1fe;
 }
 
-.color-row .color-info {
+.student-row .student-info {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.color-info div {
+.student-info div {
     margin-right: 2px;
 }
 
-.color-id {
+.student-id {
     width: 10%;
 }
 
-.color-name {
+.student-name {
     width: 20%;
 }
 
-/* styles for the add color row */
-.color-row input {
+.student-email {
+    width: 20%;
+}
+
+.student-major {
+    width: 40%;
+}
+
+.student-gpa {
+    width: 10%;
+}
+
+/* styles for the add student row */
+.student-row input {
     border: 1px solid #cccccc;
     width: 100%;
     padding: 0px 5px;
@@ -58,7 +70,7 @@
 
 /* styles for edit and delete buttons */
 
-.color-row .color-buttons {
+.student-row .student-buttons {
     min-width: 190px;
     text-align: right;
 }
@@ -93,13 +105,13 @@ button:disabled:hover {
     color: rgba(16, 16, 16, 0.3)
 }
 
-/* styles for the create and edit color forms */
-.form-color .form-group {
+/* styles for the create and edit student forms */
+.form-student .form-group {
     display: flex;
     padding: 10px 5px;
 }
 
-.form-color .form-group label {
+.form-student .form-group label {
     width: 100px;
     margin-top: 6px;
     margin-right: 10px;
@@ -107,14 +119,14 @@ button:disabled:hover {
     font-weight: 500;
 }
 
-.form-color .form-group input {
+.form-student .form-group input {
     width: 100%;
     padding: 0.375rem 0.75rem;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
 
-.form-color-errors {
+.form-student-errors {
     font-size: small;
     color: red;
 }

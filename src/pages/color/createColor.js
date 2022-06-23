@@ -1,34 +1,40 @@
+//Lily Weber 6/22/2022
+
 import {useState, useEffect} from "react";
-import UseFetch from "../../services/useFetch";
+import UseFetch from "./useFetch";
 import {Button, Modal} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import JSONPretty from "react-json-pretty";
-import './color.css';
+import "./color.css";
 
-import React from 'react';
+
 
 const CreateColor = ({showModal, setShowModal, reload, setReload, setSubHeading}) => {
+
     const {error, isLoading, data: response, create} = UseFetch();
     const [submitted, setSubmitted] = useState(false);
     const [showButton, setShowButton] = useState(true);
 
     const {register, handleSubmit, formState: {errors}} = useForm({
-        defaultValues: {colorID: "", colorName: ""},
+        defaultValues: {id: "", name: ""},
         shouldUseNativeValidation: false
     });
+
     const createFormOptions = {
-        colorID: {required: "ID is required"},
-        colorName: {required: "Name is required"}
+        id: {required: "ID is required"},
+        name: {required: "Name is required"}
     }
 
     const handleCreate = (color) => {
-        create(color);
+        create({"colorID": color.id, "colorName": color.name});
         setSubmitted(true);
     }
+
     const handleCancel = () => {
         setShowModal(false);
         setSubHeading("All Colors");
     }
+
     const handleClose = () => {
         setShowModal(false);
         setShowButton(true);
@@ -36,6 +42,7 @@ const CreateColor = ({showModal, setShowModal, reload, setReload, setSubHeading}
         setReload(!reload);
         setSubHeading("All Colors");
     }
+
     useEffect(() => {
         if (!submitted || error != null) {
             setShowButton(true);
@@ -44,40 +51,45 @@ const CreateColor = ({showModal, setShowModal, reload, setReload, setSubHeading}
         }
     })
 
+
+
     return (
         <>
+
+
             <Modal show={showModal} onHide={handleClose} centered animation={false} backdrop="static">
                 <Modal.Header closeButton>
-                    <h4>Create Student</h4>
+                    <h4>Create Color</h4>
                 </Modal.Header>
                 <Modal.Body>
-                    {error && <JSONPretty data={error}></JSONPretty>}
+                    {error && <JSONPretty data={error} style={{color: "red"}}></JSONPretty>}
                     {isLoading &&
-                        <div className="image-loading">
-                            Please wait while data is being loaded
-                            <img src={require(`../loading.gif`)} alt="Loading ......"/>
-                        </div>
+                    <div className="image-loading">
+                        Please wait while data is being loaded
+                        <img src={require(`../loading.gif`)} alt="Loading ......"/>
+                    </div>
                     }
                     {response && <JSONPretty data={response}></JSONPretty>}
                     {(!submitted || error != null) &&
-                        <form className="form-color" id="form-color-edit" onSubmit={handleSubmit(handleCreate)}>
-                            <ul className="form-color-errors">
-                                {errors?.colorID && <li>{errors.colorID.message}</li>}
-                                {errors?.colorName && <li>{errors.colorName.message}</li>}
-                            </ul>
-                            <div className="form-group">
-                                <label>Color ID</label>
-                                <input name="colorID" {...register('colorID', createFormOptions.colorID)}/>
-                            </div>
-                            <div className="form-group">
-                                <label>Color Name</label>
-                                <input type="text" name="colorName" {...register('colorName', createFormOptions.colorName)}/>
-                            </div>
-                        </form>
+                    <form className="form-student" id="form-student-edit" onSubmit={handleSubmit(handleCreate)}>
+                        <ul className="form-student-errors">
+                            {errors?.id && <li>{errors.id.message}</li>}
+                            {errors?.name && <li>{errors.name.message}</li>}
+
+                        </ul>
+                        <div className="form-group">
+                            <label>Color ID</label>
+                            <input name="id" {...register('id', createFormOptions.id)}/>
+                        </div>
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" {...register('name', createFormOptions.name)}/>
+                        </div>
+                    </form>
                     }
                 </Modal.Body>
                 <Modal.Footer style={{justifyContent: "center"}}>
-                    <Button variant="primary" form="form-color-edit" type="submit"
+                    <Button variant="primary" form="form-student-edit" type="submit"
                             style={{display: (!showButton) ? "none" : ""}}>Create</Button>
                     <Button variant="secondary" onClick={handleCancel}
                             style={{display: (!showButton) ? "none" : ""}}>Cancel</Button>
@@ -85,6 +97,8 @@ const CreateColor = ({showModal, setShowModal, reload, setReload, setSubHeading}
                             style={{display: (!showButton) ? "" : "none"}}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
+
         </>
     );
 };

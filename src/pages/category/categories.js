@@ -5,7 +5,7 @@ import './category.css';
 import React from 'react';
 import {useAuth} from "../../services/useAuth";
 import useAxios from "../../services/useAxios";
-//import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Pagination from "./pagination";
 
 const Categories = () => {
@@ -17,7 +17,7 @@ const Categories = () => {
         error,
         isLoading,
         data: categories
-    } = useAxios(url, "GET", {Authorization:`Bearer ${user.jwt}`});
+    } = useAxios(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
     useEffect(() => {
         setSubHeading("All categories");
     }, [pathname]);

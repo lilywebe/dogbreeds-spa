@@ -4,21 +4,22 @@ Date: 6-22-22
 File: deleteColor.js
 Description: this script creates a component for deleting a color
 */
-
-import React from 'react';
 import {useState, useEffect} from "react";
-import UseFetch from "../../services/useFetch";
+import UseFetch from "./useFetch";
 import {Button, Modal} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import JSONPretty from "react-json-pretty";
 
+
+
 const DeleteColor = ({showModal, setShowModal, data, reload, setReload, setSubHeading}) => {
+
     const {error, isLoading, data: response, remove} = UseFetch();
     const [showButton, setShowButton] = useState(true);
     const navigate = useNavigate();
 
     const handleDelete = () => {
-        remove(data.colorID);
+        remove(data.id);
         setShowButton(false);
     }
 
@@ -36,8 +37,11 @@ const DeleteColor = ({showModal, setShowModal, data, reload, setReload, setSubHe
         navigate("/colors");
     }
 
+
+
+
     return (
-        <div>
+        <>
             <Modal show={showModal} onHide={handleClose} centered animation={false} backdrop="static">
                 <Modal.Header closeButton>
                     <h4>Delete Color</h4>
@@ -67,7 +71,7 @@ const DeleteColor = ({showModal, setShowModal, data, reload, setReload, setSubHe
                             style={{display: (!showButton) ? "" : "none"}}>Close</Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     );
 };
 

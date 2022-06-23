@@ -5,20 +5,24 @@ File: editColor.js
 Description: this script creates a component for editing a color
 */
 
-import React from 'react';
 import {useState, useEffect} from "react";
-import UseFetch from "../../services/useFetch";
+import UseFetch from "./useFetch";
 import {useNavigate} from "react-router-dom";
 import {Button, Modal} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import JSONPretty from "react-json-pretty";
 import "./color.css";
 
+
+
 const EditColor = ({showModal, setShowModal, data, reload, setReload, setSubHeading}) => {
+
     const {error, isLoading, data: response, update} = UseFetch();
     const navigate = useNavigate();
     const [submitted, setSubmitted] = useState(false);
     const [showButton, setShowButton] = useState(true);
+
+
 
     const {register, handleSubmit, formState: {errors}} = useForm({
         defaultValues: data,
@@ -26,19 +30,20 @@ const EditColor = ({showModal, setShowModal, data, reload, setReload, setSubHead
     });
 
     const editFormOptions = {
-        colorID: {required: "ID is required"},
-        colorName: {required: "Name is required"}
+        id: {required: "ID is required"},
+        name: {required: "Name is required"}
     }
 
     const handleUpdate = (color) => {
-        update(color);
+        console.log(color);
+        update({"colorID": color.id, "colorName": color.name});
         setSubmitted(true);
     }
 
     const handleCancel = () => {
         setShowModal(false);
         setSubHeading("All Colors");
-        navigate("/students")
+        navigate("/colors")
     }
 
     const handleClose = () => {
@@ -47,7 +52,7 @@ const EditColor = ({showModal, setShowModal, data, reload, setReload, setSubHead
         setSubmitted(false);
         setReload(!reload);
         setSubHeading("All Colors");
-        navigate("/students")
+        navigate("/colors")
     }
 
     useEffect(() => {
@@ -59,7 +64,8 @@ const EditColor = ({showModal, setShowModal, data, reload, setReload, setSubHead
     })
 
     return (
-        <div>
+        <>
+
             <Modal show={showModal} onHide={handleClose} centered animation={false} backdrop="static">
                 <Modal.Header closeButton>
                     <h4>Edit Color</h4>
@@ -74,19 +80,20 @@ const EditColor = ({showModal, setShowModal, data, reload, setReload, setSubHead
                     }
                     {response && <JSONPretty data={response}></JSONPretty>}
                     {(!submitted || error != null) &&
-                    <form className="form-color" id="form-color-edit" onSubmit={handleSubmit(handleUpdate)}>
-                        <ul className="form-color-errors">
-                            {errors?.colorID && <li>{errors.colorID.message}</li>}
-                            {errors?.colorName && <li>{errors.colorName.message}</li>}
+                    <form className="form-student" id="form-student-edit" onSubmit={handleSubmit(handleUpdate)}>
+                        <ul className="form-student-errors">
+                            {errors?.id && <li>{errors.id.message}</li>}
+                            {errors?.name && <li>{errors.name.message}</li>}
                         </ul>
                         <div className="form-group">
                             <label>Color ID</label>
-                            <input name="colorID" readOnly="readOnly" {...register('colorID', editFormOptions.colorID)}/>
+                            <input name="id" readOnly="readOnly" {...register('id', editFormOptions.id)}/>
                         </div>
                         <div className="form-group">
-                            <label>Color Name</label>
-                            <input type="text" name="colorName" {...register('colorName', editFormOptions.colorName)}/>
+                            <label>Name</label>
+                            <input type="text" name="name" {...register('name', editFormOptions.name)}/>
                         </div>
+
                     </form>}
                 </Modal.Body>
                 <Modal.Footer style={{justifyContent: "center"}}>
@@ -98,7 +105,8 @@ const EditColor = ({showModal, setShowModal, data, reload, setReload, setSubHead
                             style={{display: (!showButton) ? "" : "none"}}>Close</Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+
+        </>
     );
 };
 
