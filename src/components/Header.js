@@ -28,7 +28,12 @@ const Header = () => {
 
                             <NavLink to="/categories" className={className}>Breed Categories</NavLink>
                             <div className="nav-separator">|</div>
+
                             <NavLink to="/breeds" className={className}>Breeds</NavLink>
+                            <div className="nav-separator">|</div>
+
+                            <NavLink to="/colors" className={className}>Color</NavLink>
+                            <div className="nav-separator">|</div>
 
                             {isAuthed
                                 ? <NavLink to="/signout" className={className}>Sign out</NavLink>

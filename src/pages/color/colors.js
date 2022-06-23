@@ -3,6 +3,7 @@
 //colors.js
 //creates the colors component
 
+import React from 'react';
 import {useEffect, useState} from 'react';
 import UseFetch from "../../services/useFetch";
 import JSONPretty from 'react-json-pretty';
@@ -12,11 +13,11 @@ import {useAuth} from "../../services/useAuth";
 import EditColor from './editColor';
 import CreateColor from './createColor';
 import DeleteColor from './deleteColor';
-import React from 'react';
 
 const Colors = () => {
     const {error, isLoading, data: colors, getAll, search} = UseFetch();
     const [subHeading, setSubHeading] = useState("All Colors");
+
     useEffect(() => {
         getAll();
     }, []);
@@ -128,9 +129,14 @@ const Colors = () => {
                                     <button
                                         className="button-light"
                                         disabled={disabled}
-                                        onClick={handleEdit}>Edit</button>
-                                    <button className="button-light" id={color.colorID} disabled={disabled}
-                                            onClick={handleDelete}>Delete</button>
+                                        onClick={handleEdit}>Edit
+                                    </button>
+                                    <button
+                                        className="button-light"
+                                        id={color.colorID}
+                                        disabled={disabled}
+                                        onClick={handleDelete}>Delete
+                                    </button>
 
                                 </div>
                             </div>
@@ -146,23 +152,28 @@ const Colors = () => {
                         setSubHeading={setSubHeading}/>}
 
                 {showDeleteModal &&
-                    <DeleteColor showModal={showDeleteModal} setShowModal={setShowDeleteModal}
-                                   data={activeColor} reload={reload} setReload={setReload}
-                                   setSubHeading={setSubHeading}/>}
+                    <DeleteColor
+                        showModal={showDeleteModal}
+                        setShowModal={setShowDeleteModal}
+                        data={activeColor}
+                        reload={reload}
+                        setReload={setReload}
+                        setSubHeading={setSubHeading}/>}
 
-
-                {showCreateModal &&<CreateColor
+                {showCreateModal &&
+                <CreateColor
                     showModal={showCreateModal}
                     setShowModal={setShowCreateModal}
                     reload={reload}
                     setReload={setReload}
                     setSubHeading={setSubHeading}/>}
                 <div>
-                    <button className="button-create" disabled={disabled} onClick={handleCreate}>
-                        Create Color
+                    <button
+                        className="button-create"
+                        disabled={disabled}
+                        onClick={handleCreate}>Create Color
                     </button>
                 </div>
-
             </div>
         </>
     );
