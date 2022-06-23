@@ -17,27 +17,6 @@ import DeleteColor from './deleteColor';
 const Colors = () => {
     const {error, isLoading, data: colors, getAll, search} = UseFetch();
     const [subHeading, setSubHeading] = useState("All Colors");
-
-    useEffect(() => {
-        getAll();
-    }, []);
-
-    const handleSearch = (e) => {
-        e.preventDefault();
-        const term = document.getElementById("color-search-term").value;
-        if(term == '')
-            setSubHeading("All Colors");
-        else if(isNaN(term))
-            setSubHeading("Colors containing '" + term + "'");
-        search(term);
-    }
-
-    const clearSearchBox = (e) => {
-        e.preventDefault();
-        document.getElementById("color-search-term").value = "";
-        search("");
-    }
-
     const navigate = useNavigate();
     const [activeColor, setActiveColor] = useState(""); //the color being edited
     const [showEditModal, setShowEditModal] = useState(false);
@@ -49,6 +28,22 @@ const Colors = () => {
     useEffect(() => {
         getAll();
     }, [reload]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const term = document.getElementById("color-search-term").value;
+        if(term === '')
+            setSubHeading("All Colors");
+        else if(isNaN(term))
+            setSubHeading("Colors containing '" + term + "'");
+        search(term);
+    }
+
+    const clearSearchBox = (e) => {
+        e.preventDefault();
+        document.getElementById("color-search-term").value = "";
+        search("");
+    }
 
     const handleEdit = (e) => {
         if(disabled) return;

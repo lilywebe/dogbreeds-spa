@@ -17,7 +17,7 @@ const Categories = () => {
         error,
         isLoading,
         data: categories
-    } = useAxios(url, "GET", {Authorization:`Bearer ${user.jwt}`}); ;
+    } = useAxios(url, "GET", {Authorization:`Bearer ${user.jwt}`});
     useEffect(() => {
         setSubHeading("All categories");
     }, [pathname]);
