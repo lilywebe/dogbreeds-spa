@@ -48,18 +48,6 @@
     width: 20%;
 }
 
-.color-email {
-    width: 20%;
-}
-
-.color-major {
-    width: 40%;
-}
-
-.color-gpa {
-    width: 10%;
-}
-
 /* styles for the add color row */
 .color-row input {
     border: 1px solid #cccccc;
