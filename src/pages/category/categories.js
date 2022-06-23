@@ -5,7 +5,7 @@ import './category.css';
 import React from 'react';
 import {useAuth} from "../../services/useAuth";
 import useAxios from "../../services/useAxios";
-import {Link} from "react-router-dom";
+//import {Link} from "react-router-dom";
 import Pagination from "./pagination";
 
 const Categories = () => {
