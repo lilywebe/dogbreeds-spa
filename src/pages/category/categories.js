@@ -27,7 +27,7 @@ const Categories = () => {
         <div>
             <div>
                 <div className="main-heading">
-                    <div className="container">Category</div>
+                    <div className="container">Categories</div>
                 </div>
                 <div className="sub-heading">
                     <div className="container">{subHeading}</div>
