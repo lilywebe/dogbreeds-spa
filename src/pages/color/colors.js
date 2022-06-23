@@ -81,7 +81,7 @@ const Colors = () => {
         <>
 
             <div className="main-heading">
-                <div className="container">Color</div>
+                <div className="container">Colors</div>
             </div>
             <div className="sub-heading">
                 <div className="container">{subHeading}</div>

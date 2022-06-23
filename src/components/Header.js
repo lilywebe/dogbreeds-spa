@@ -31,7 +31,7 @@ const Header = () => {
                             <NavLink to="/breeds" className={className}>Breeds</NavLink>
                             <div className="nav-separator">|</div>
                             <NavLink to="/colors" className={className}>Colors</NavLink>
-
+                            <div className="nav-separator">|</div>
                             {isAuthed
                                 ? <NavLink to="/signout" className={className}>Sign out</NavLink>
                                 : <NavLink to="/signin" className={className}>Sign in/Sign up</NavLink>

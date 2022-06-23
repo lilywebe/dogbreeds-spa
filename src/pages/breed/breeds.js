@@ -18,6 +18,7 @@ const Breeds = () => {
     const url_origins = settings.baseApiUrl + "/origins";
     const url_temp = settings.baseApiUrl + "/temperaments";
     const {user} = useAuth();
+    const [subHeading, setSubHeading] = useState("All Breeds");
 
     //declare the data fetching function
     const {
@@ -135,9 +136,11 @@ const Breeds = () => {
             {showBreed && <Breed show={showBreed} setShow={setShowBreed}/>}
 
             <div className="main-heading">
-                <div className="container">All Breeds</div>
+                <div className="container">Breeds</div>
             </div>
-
+            <div className="sub-heading">
+                <div className="container">{subHeading}</div>
+            </div>
             <div className="main-content container">
                 {(error || error_sizes || error_category|| error_origins || error_temp) && <div>{error}</div>}
                 {(isLoading || isLoading_sizes || isLoading_category || isLoading_origins || isLoading_temp) &&
